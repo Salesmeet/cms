@@ -1,0 +1,9 @@
+seguire steps qui:
+https://keenthemes.com/metronic/?page=docs&section=angular-installation
+
+dalla root del git repo eseguire:
+
+npm clear cache --force
+npm install
+
+ng serve --host 0.0.0.0
