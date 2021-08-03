@@ -258,7 +258,7 @@ export class NgbdRatingConfig {
   styles: [
     `
 		.star {
-		f	ont-size: 1.5rem;
+			font-size: 1.5rem;
 			color: #b0c4de;
 		}
 		.filled {
