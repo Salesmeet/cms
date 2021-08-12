@@ -7,7 +7,7 @@ export const environment = {
   appVersion: 'v726demo2',
   USERDATA_KEY: 'authf649fc9a5f55',
   isMockEnabled: false,
-  apiUrl: 'http://fadev.bounceme.net/salesmeet_cms'
+  apiUrl: 'http://127.0.0.1:9000/salesmeet_cms'
 };
 
 /*

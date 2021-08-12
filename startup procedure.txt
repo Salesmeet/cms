@@ -1,12 +1,37 @@
+****** SETTING
+
+FRONTEND
+
+src/environments/environment.ts
+
+BACKEND
+
+ssslim-app/config/config.php
+ssslim-app/config/database.php
+
+***** ATTIVAZIONE FRONTEND
+
 seguire steps qui:
 https://keenthemes.com/metronic/?page=docs&section=angular-installation
 
 dalla root del git repo eseguire:
 
 npm clear cache --force
+
 npm install
+
+npm start
 
 ng serve --host 0.0.0.0
 o
 npx ng serve --host 0.0.0.0
-dd
+
+
+****** ATTIVAZIONE BACKEND
+
+php -S 127.0.0.1:9000
+
+http://127.0.0.1:9000/salesmeet_cms/
+http://127.0.0.1:9000/salesmeet_cms/auth/login
+
+il file da modificare per le route è: ssslim-app/libraries/Router/Implementation.php

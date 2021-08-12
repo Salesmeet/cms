@@ -34,7 +34,7 @@ class DB extends CI_DB_driver {
 	 * Whether to use the MySQL "delete hack" which allows the number
 	 * of affected rows to be shown. Uses a preg_replace when enabled,
 	 * adding a bit more processing to all queries.
-	 */	
+	 */
 	var $delete_hack = TRUE;
 
 	// --------------------------------------------------------------------
@@ -44,7 +44,7 @@ class DB extends CI_DB_driver {
 	 *
 	 * @access	private called by the base class
 	 * @return	resource
-	 */	
+	 */
 	function db_connect()
 	{
 		//TODO implement a way to disable output of DB errors in live environment
@@ -64,7 +64,7 @@ class DB extends CI_DB_driver {
 	 *
 	 * @access	private called by the base class
 	 * @return	resource
-	 */	
+	 */
 	function db_select()
 	{
 		return @mysqli_select_db($this->conn_id, $this->database);
@@ -79,16 +79,16 @@ class DB extends CI_DB_driver {
 	 * @access	private called by the base class
 	 * @param	string	an SQL query
 	 * @return	resource
-	 */	
+	 */
 	function _execute($sql)
 	{
-		$sql = $this->_prep_query($sql);	
+		$sql = $this->_prep_query($sql);
 		$result = @mysqli_query($this->conn_id, $sql);
 		// patched by krs to fix error not being returned from mysqli_error and mysqli_errno (only commented the line below)
 		//mysqli_next_result($this->conn_id);
 		return $result;
 	}
-	
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -99,7 +99,7 @@ class DB extends CI_DB_driver {
 	 * @access	private called by execute()
 	 * @param	string	an SQL query
 	 * @return	string
-	 */	
+	 */
 	function _prep_query($sql)
 	{
 		// "DELETE FROM TABLE" returns 0 affected rows This hack modifies
@@ -111,7 +111,7 @@ class DB extends CI_DB_driver {
 				$sql = preg_replace("/^\s*DELETE\s+FROM\s+(\S+)\s*$/", "DELETE FROM \\1 WHERE 1=1", $sql);
 			}
 		}
-		
+
 		return $sql;
 	}
 
@@ -141,16 +141,18 @@ class DB extends CI_DB_driver {
 	 * @param	string
 	 * @return	string
 	 */
-	function escape_str($str)	
-	{	
+	function escape_str($str)
+	{
+		/* funzione DEPRECATA in 8.0
 		if (get_magic_quotes_gpc())
 		{
 			return $str;
 		}
+		*/
 
 		return mysqli_real_escape_string($this->conn_id, $str);
 	}
-		
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -163,7 +165,7 @@ class DB extends CI_DB_driver {
 	{
 		return @mysqli_affected_rows($this->conn_id);
 	}
-	
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -189,7 +191,7 @@ class DB extends CI_DB_driver {
 	{
 		return mysqli_error($this->conn_id);
 	}
-	
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -202,7 +204,7 @@ class DB extends CI_DB_driver {
 	{
 		return mysqli_errno($this->conn_id);
 	}
-	
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -221,10 +223,10 @@ class DB extends CI_DB_driver {
 		{
 			$table = preg_replace("/\./", "`.`", $table);
 		}
-		
+
 		return $table;
 	}
-		
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -239,10 +241,10 @@ class DB extends CI_DB_driver {
 	 * @return	string
 	 */
 	function _insert($table, $keys, $values)
-	{	
+	{
 		return "INSERT INTO ".$this->_escape_table($table)." (".implode(', ', $keys).") VALUES (".implode(', ', $values).")";
 	}
-	
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -262,10 +264,10 @@ class DB extends CI_DB_driver {
 		{
 			$valstr[] = $key." = ".$val;
 		}
-	
+
 		return "UPDATE ".$this->_escape_table($table)." SET ".implode(', ', $valstr)." WHERE ".implode(" ", $where);
 	}
-	
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -277,7 +279,7 @@ class DB extends CI_DB_driver {
 	 * @param	string	the table name
 	 * @param	array	the where clause
 	 * @return	string
-	 */	
+	 */
 	function _delete($table, $where)
 	{
 		return "DELETE FROM ".$this->_escape_table($table)." WHERE ".implode(" ", $where);
